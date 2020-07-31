@@ -23,7 +23,7 @@ import pyemma.coordinates.clustering as clustering
 import pyemma
 
 class modelWE():
-    """Implementation of haMSM model building, particularly for steady-state estimation (but there are lots of extras), from WE sampling with basis (source) and target (sink) states with recycling. Set up for typical west.h5 file structure, with coordinates to be stored in west.h5 /iterations/auxdata/coord and basis and target definitions from progress coordinates. Check out run_msmWE.slurm and run_msmWE_flux.py in scripts folder for an implementation example. See Copperman and Zuckerman, Accelerated estimation of long-timescale kinetics by combining weighted ensemble simulation with Markov model microstates using non-Markovian theory, JCTC (2020)."""
+    """Implementation of haMSM model building, particularly for steady-state estimation (but there are lots of extras), from WE sampling with basis (source) and target (sink) states with recycling. Set up for typical west.h5 file structure, with coordinates to be stored in west.h5 /iterations/auxdata/coord and basis and target definitions from progress coordinates. Check out run_msmWE.slurm and run_msmWE_flux.py in scripts folder for an implementation example. See Copperman and Zuckerman, Accelerated estimation of long-timescale kinetics by combining weighted ensemble simulation with Markov model microstates using non-Markovian theory, arXiv (2020)."""
 
     def initialize(self,fileSpecifier,refPDBfile,initPDBfile,modelName):
         self.modelName=modelName
