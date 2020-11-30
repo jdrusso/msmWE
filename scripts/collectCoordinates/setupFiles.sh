@@ -26,7 +26,7 @@ do
     fi
     refPDBfile=/home/groups/ZuckermanLab/copperma/msmWE/proteinG/reference.pdb
     initPDBfile=/home/groups/ZuckermanLab/copperma/msmWE/proteinG/coor0.pdb
-    modelName=proteinG_rw1_Run${runNumber}
+    modelName=proteinG_rw1_Run${i}
     #WEfolder=${pathtoWE}/Run${crunNumber}
     WEfolder=${pathtoWE}/proteinG_rw1b_1D_aug28_${i}
     fileSpecifier=$runFileOut
