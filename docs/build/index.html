@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Welcome to msm_we’s documentation! &mdash; msm_we  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> msm_we
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to msm_we’s documentation!</a></li>
+<li><a class="reference internal" href="#module-msmWE">msm_we</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">msm_we</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Welcome to msm_we’s documentation!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="welcome-to-msm-we-s-documentation">
+<h1>Welcome to msm_we’s documentation!<a class="headerlink" href="#welcome-to-msm-we-s-documentation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="module-msmWE">
+<span id="msm-we"></span><h1>msm_we<a class="headerlink" href="#module-msmWE" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="msmWE.modelWE">
+<em class="property">class </em><code class="sig-prename descclassname">msmWE.</code><code class="sig-name descname">modelWE</code><a class="headerlink" href="#msmWE.modelWE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of haMSM model building, particularly for steady-state estimation (but there are lots of extras),
+from WE sampling with basis (source) and target (sink) states with recycling.</p>
+<p>Set up for typical west.h5 file structure, with coordinates to be stored in west.h5 /iterations/auxdata/coord and
+basis and target definitions from progress coordinates. Check out run_msmWE.slurm and run_msmWE_flux.py in scripts
+folder for an implementation example. See Copperman and Zuckerman, Accelerated estimation of long-timescale kinetics
+by combining weighted ensemble simulation with Markov model microstates using non-Markovian theory, arXiv (2020).</p>
+<dl class="py method">
+<dt id="msmWE.modelWE.initialize">
+<code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fileSpecifier</span></em>, <em class="sig-param"><span class="n">refPDBfile</span></em>, <em class="sig-param"><span class="n">initPDBfile</span></em>, <em class="sig-param"><span class="n">modelName</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.initialize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.is_WE_basis">
+<code class="sig-name descname">is_WE_basis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pcoords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.is_WE_basis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.is_WE_target">
+<code class="sig-name descname">is_WE_target</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pcoords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.is_WE_target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iter_data">
+<code class="sig-name descname">get_iter_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iter_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iterations">
+<code class="sig-name descname">get_iterations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iterations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iterations_iters">
+<code class="sig-name descname">get_iterations_iters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">first_iter</span></em>, <em class="sig-param"><span class="n">last_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iterations_iters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.set_topology">
+<code class="sig-name descname">set_topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PDBfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.set_topology" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.set_basis">
+<code class="sig-name descname">set_basis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">PDBfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.set_basis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_transition_data">
+<code class="sig-name descname">get_transition_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_lag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_transition_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_transition_data_lag0">
+<code class="sig-name descname">get_transition_data_lag0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_transition_data_lag0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_warps_from_parent">
+<code class="sig-name descname">get_warps_from_parent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">first_iter</span></em>, <em class="sig-param"><span class="n">last_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_warps_from_parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_warps_from_pcoord">
+<code class="sig-name descname">get_warps_from_pcoord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">first_iter</span></em>, <em class="sig-param"><span class="n">last_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_warps_from_pcoord" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_direct_target_flux">
+<code class="sig-name descname">get_direct_target_flux</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">first_iter</span></em>, <em class="sig-param"><span class="n">last_iter</span></em>, <em class="sig-param"><span class="n">window</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_direct_target_flux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_seg_histories">
+<code class="sig-name descname">get_seg_histories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_hist</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_seg_histories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.collect_iter_coordinates">
+<code class="sig-name descname">collect_iter_coordinates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.collect_iter_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iter_coordinates">
+<code class="sig-name descname">get_iter_coordinates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iter_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iter_coordinates0">
+<code class="sig-name descname">get_iter_coordinates0</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iter_coordinates0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_coordinates">
+<code class="sig-name descname">get_coordinates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">first_iter</span></em>, <em class="sig-param"><span class="n">last_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_coordSet">
+<code class="sig-name descname">get_coordSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">last_iter</span></em>, <em class="sig-param"><span class="n">n_coords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_coordSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_traj_coordinates">
+<code class="sig-name descname">get_traj_coordinates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">from_iter</span></em>, <em class="sig-param"><span class="n">traj_length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_traj_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.dimReduce">
+<code class="sig-name descname">dimReduce</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.dimReduce" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt id="msmWE.modelWE.Coordinates">
+<em class="property">class </em><code class="sig-name descname">Coordinates</code><a class="headerlink" href="#msmWE.modelWE.Coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="msmWE.modelWE.Coordinates.transform">
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.Coordinates.transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.processCoordinates">
+<code class="sig-name descname">processCoordinates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.processCoordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.reduceCoordinates">
+<code class="sig-name descname">reduceCoordinates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">coords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.reduceCoordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.cluster_coordinates">
+<code class="sig-name descname">cluster_coordinates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_clusters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.cluster_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.load_clusters">
+<code class="sig-name descname">load_clusters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">clusterFile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.load_clusters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iter_fluxMatrix">
+<code class="sig-name descname">get_iter_fluxMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iter_fluxMatrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_pcoord1D_fluxMatrix">
+<code class="sig-name descname">get_pcoord1D_fluxMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_lag</span></em>, <em class="sig-param"><span class="n">first_iter</span></em>, <em class="sig-param"><span class="n">last_iter</span></em>, <em class="sig-param"><span class="n">binbounds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_pcoord1D_fluxMatrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iter_pcoord1D_fluxMatrix_lag0">
+<code class="sig-name descname">get_iter_pcoord1D_fluxMatrix_lag0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_iter</span></em>, <em class="sig-param"><span class="n">binbounds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iter_pcoord1D_fluxMatrix_lag0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_fluxMatrix">
+<code class="sig-name descname">get_fluxMatrix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_lag</span></em>, <em class="sig-param"><span class="n">first_iter</span></em>, <em class="sig-param"><span class="n">last_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_fluxMatrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.organize_fluxMatrix">
+<code class="sig-name descname">organize_fluxMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.organize_fluxMatrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_model_clusters">
+<code class="sig-name descname">get_model_clusters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_model_clusters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_Tmatrix">
+<code class="sig-name descname">get_Tmatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_Tmatrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_eqTmatrix">
+<code class="sig-name descname">get_eqTmatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_eqTmatrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_steady_state_algebraic">
+<code class="sig-name descname">get_steady_state_algebraic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_steady_state_algebraic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_steady_state_matrixpowers">
+<code class="sig-name descname">get_steady_state_matrixpowers</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_steady_state_matrixpowers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_steady_state_target_flux">
+<code class="sig-name descname">get_steady_state_target_flux</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_steady_state_target_flux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.evolve_probability">
+<code class="sig-name descname">evolve_probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nEvolve</span></em>, <em class="sig-param"><span class="n">nStore</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.evolve_probability" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.evolve_probability2">
+<code class="sig-name descname">evolve_probability2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nEvolve</span></em>, <em class="sig-param"><span class="n">nStore</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.evolve_probability2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.evolve_probability_from_initial">
+<code class="sig-name descname">evolve_probability_from_initial</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p0</span></em>, <em class="sig-param"><span class="n">nEvolve</span></em>, <em class="sig-param"><span class="n">nStore</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.evolve_probability_from_initial" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_flux">
+<code class="sig-name descname">get_flux</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_flux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_flux_committor">
+<code class="sig-name descname">get_flux_committor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_flux_committor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.plot_flux_committor">
+<code class="sig-name descname">plot_flux_committor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nwin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.plot_flux_committor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.plot_flux">
+<code class="sig-name descname">plot_flux</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.plot_flux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.evolve_target_flux">
+<code class="sig-name descname">evolve_target_flux</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.evolve_target_flux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_hflux">
+<code class="sig-name descname">get_hflux</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_hflux" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_model_aristoffian">
+<code class="sig-name descname">get_model_aristoffian</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_model_aristoffian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_model_steady_state_aristoffian">
+<code class="sig-name descname">get_model_steady_state_aristoffian</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_model_steady_state_aristoffian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_initial_khbins">
+<code class="sig-name descname">get_initial_khbins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_initial_khbins" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_initial_khbins_equalAlloc">
+<code class="sig-name descname">get_initial_khbins_equalAlloc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_initial_khbins_equalAlloc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_bin_kh_var">
+<code class="sig-name descname">get_bin_kh_var</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_bin_kh_var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_bin_total_var">
+<code class="sig-name descname">get_bin_total_var</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_bin_total_var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_iter_aristoffian">
+<code class="sig-name descname">get_iter_aristoffian</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iter_aristoffian" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.write_iter_kh_pcoord">
+<code class="sig-name descname">write_iter_kh_pcoord</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.write_iter_kh_pcoord" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_committor">
+<code class="sig-name descname">get_committor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_committor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.get_backwards_committor">
+<code class="sig-name descname">get_backwards_committor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conv</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_backwards_committor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="msmWE.modelWE.plot_committor">
+<code class="sig-name descname">plot_committor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.plot_committor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Jeremy Copperman.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
