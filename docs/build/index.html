@@ -156,6 +156,7 @@
             
   <div class="section" id="welcome-to-msm-we-s-documentation">
 <h1>Welcome to msm_we’s documentation!<a class="headerlink" href="#welcome-to-msm-we-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This is a package for doing haMSM analysis on weighted ensemble trajectories.</p>
 </div>
 <div class="section" id="module-msmWE">
 <span id="msm-we"></span><h1>msm_we<a class="headerlink" href="#module-msmWE" title="Permalink to this headline">¶</a></h1>
@@ -171,22 +172,98 @@ by combining weighted ensemble simulation with Markov model microstates using no
 <dl class="py method">
 <dt id="msmWE.modelWE.initialize">
 <code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fileSpecifier</span></em>, <em class="sig-param"><span class="n">refPDBfile</span></em>, <em class="sig-param"><span class="n">initPDBfile</span></em>, <em class="sig-param"><span class="n">modelName</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.initialize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initialize the model-builder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fileSpecifier</strong> (<em>string</em>) – <p>Glob that will produce a list of the output WESTPA files to analyze.</p>
+<p>This is passed to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls fileSpecifier
+</pre></div>
+</div>
+<p>and <em>all</em> the files returned by this are used in the analysis.</p>
+</p></li>
+<li><p><strong>refPDBfile</strong> (<em>string</em>) – Path to PDB file that defines topology</p></li>
+<li><p><strong>initPDBfile</strong> (<em>string</em>) – Path to PDB file that defines the basis state
+<strong>TODO</strong> can this be states plural? Does it need to be extended to that?</p></li>
+<li><p><strong>modelName</strong> (<em>string</em>) – Name to use in output filenames.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This code, in general, assumes a 1-D progress coordinate.</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="msmWE.modelWE.is_WE_basis">
 <code class="sig-name descname">is_WE_basis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pcoords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.is_WE_basis" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Checks if the input progress coordinates are in the basis state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pcoords</strong> (<em>numpy.ndarray</em><em>(</em><em>num_segments</em><em>, </em><em>num_pcoords</em><em>)</em>) – Array of progress coordinates for each segment.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>True or False</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>This only checks the 0th progress coordinate</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="msmWE.modelWE.is_WE_target">
 <code class="sig-name descname">is_WE_target</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pcoords</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.is_WE_target" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Checks if the input progress coordinates are in the target state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pcoords</strong> (<em>numpy.ndarray</em><em>(</em><em>num_segments</em><em>, </em><em>num_pcoords</em><em>)</em>) – Array of progress coordinates for each segment.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>True or False</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>This only checks the 0th progress coordinate</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="msmWE.modelWE.get_iter_data">
 <code class="sig-name descname">get_iter_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_iter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.get_iter_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Find the data corresponding to an iteration and update the object’s fields with it.</p>
+<dl class="simple">
+<dt>Object fields updated with the information from the selected iteration:</dt><dd><ul class="simple">
+<li><p>self.westList</p></li>
+<li><p>self.segindList</p></li>
+<li><p>self.weightList</p></li>
+<li><p>self.nSeg</p></li>
+<li><p>self.pcoord0List</p></li>
+<li><p>self.pcoord1List</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>n_iter</strong> (<em>int</em>) – Iteration to get data for.</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>May want to rework the logic here, depending on how this is used.
+Seems like some of this iteration can be removed.</p>
+</div>
+</dd></dl>
 
 <dl class="py method">
 <dt id="msmWE.modelWE.get_iterations">
