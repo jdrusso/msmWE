@@ -156,19 +156,148 @@
             
   <div class="section" id="welcome-to-msm-we-s-documentation">
 <h1>Welcome to msm_we’s documentation!<a class="headerlink" href="#welcome-to-msm-we-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>This is a package for doing haMSM analysis on weighted ensemble trajectories.</p>
+<p>This is a package for doing history-augmented MSM (haMSM) analysis on weighted ensemble trajectories.</p>
+<p>Weighted ensemble data produced from simulations with recycling boundary conditions are naturally in a directional
+ensemble.
+This means that a history label can be assigned to every trajectory.</p>
 </div>
 <div class="section" id="module-msmWE">
 <span id="msm-we"></span><h1>msm_we<a class="headerlink" href="#module-msmWE" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="msmWE.modelWE">
 <em class="property">class </em><code class="sig-prename descclassname">msmWE.</code><code class="sig-name descname">modelWE</code><a class="headerlink" href="#msmWE.modelWE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Implementation of haMSM model building, particularly for steady-state estimation (but there are lots of extras),
+<dd><p>testing123 Implementation of haMSM model building, particularly for steady-state estimation (but there are lots of extras),
 from WE sampling with basis (source) and target (sink) states with recycling.</p>
 <p>Set up for typical west.h5 file structure, with coordinates to be stored in west.h5 /iterations/auxdata/coord and
-basis and target definitions from progress coordinates. Check out run_msmWE.slurm and run_msmWE_flux.py in scripts
-folder for an implementation example. See Copperman and Zuckerman, Accelerated estimation of long-timescale kinetics
-by combining weighted ensemble simulation with Markov model microstates using non-Markovian theory, arXiv (2020).</p>
+basis and target definitions from progress coordinates.</p>
+<p>Check out run_msmWE.slurm and run_msmWE_flux.py in scripts folder for an implementation example.</p>
+<dl class="py attribute">
+<dt id="msmWE.modelWE.modelName">
+<code class="sig-name descname">modelName</code><a class="headerlink" href="#msmWE.modelWE.modelName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name used for storing files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.fileList">
+<code class="sig-name descname">fileList</code><a class="headerlink" href="#msmWE.modelWE.fileList" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of all filenames containing data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.nF">
+<code class="sig-name descname">nF</code><a class="headerlink" href="#msmWE.modelWE.nF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of files in fileList</p>
+<p><strong>TODO:</strong> Deprecate this, replace with a property that’s just len(self.fileList)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.pcoord_ndim">
+<code class="sig-name descname">pcoord_ndim</code><a class="headerlink" href="#msmWE.modelWE.pcoord_ndim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of dimensions in the progress coordinate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.pcoord_len">
+<code class="sig-name descname">pcoord_len</code><a class="headerlink" href="#msmWE.modelWE.pcoord_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of stored progress coordinates in each iteration, per-segment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.tau">
+<code class="sig-name descname">tau</code><a class="headerlink" href="#msmWE.modelWE.tau" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resampling time for weighted ensemble.</p>
+<p><strong>TODO</strong>: Units?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.WEtargetp1">
+<code class="sig-name descname">WEtargetp1</code><a class="headerlink" href="#msmWE.modelWE.WEtargetp1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Progress coordinate value at target.</p>
+<p><strong>TODO</strong>: The 1 refers to the 1st progress coordinate, since this code assumes 1-D</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.WEbasisp1_min">
+<code class="sig-name descname">WEbasisp1_min</code><a class="headerlink" href="#msmWE.modelWE.WEbasisp1_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum progress coordinate value within the basis state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.WEbasisp1_max">
+<code class="sig-name descname">WEbasisp1_max</code><a class="headerlink" href="#msmWE.modelWE.WEbasisp1_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum progress coordinate value within the basis state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="msmWE.modelWE.dimReduceMethod">
+<code class="sig-name descname">dimReduceMethod</code><a class="headerlink" href="#msmWE.modelWE.dimReduceMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dimensionality reduction method. Must be one of “pca”, “vamp”, or “none”.</p>
+<p><strong>TODO</strong>: This is the STRING “none”, <em>NOT</em> a NoneType object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>This code currently, in general, assumes a 1-D progress coordinate.</p>
+</div>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>In general, this class’s methods generally handle data by holding state in the object. I think in general this
+would benefit from a refactor to be more stateless, rather than shifting things in and out of the object’s fields.</p>
+</div>
+<p class="rubric">References</p>
+<p>Copperman and Zuckerman,
+<em>Accelerated estimation of long-timescale kinetics by combining weighted ensemble simulation with Markov model
+microstates using non-Markovian theory</em>, <strong>arXiv</strong> (2020).</p>
 <dl class="py method">
 <dt id="msmWE.modelWE.initialize">
 <code class="sig-name descname">initialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fileSpecifier</span></em>, <em class="sig-param"><span class="n">refPDBfile</span></em>, <em class="sig-param"><span class="n">initPDBfile</span></em>, <em class="sig-param"><span class="n">modelName</span></em><span class="sig-paren">)</span><a class="headerlink" href="#msmWE.modelWE.initialize" title="Permalink to this definition">¶</a></dt>
@@ -190,9 +319,10 @@ by combining weighted ensemble simulation with Markov model microstates using no
 </ul>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This code, in general, assumes a 1-D progress coordinate.</p>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Some of this logic should be broken into a constructor, and default arguments handled in the constructor’s
+function signature.</p>
 </div>
 </dd></dl>
 
@@ -211,7 +341,7 @@ by combining weighted ensemble simulation with Markov model microstates using no
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
-<div class="admonition-todo admonition" id="id1">
+<div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
 <p>This only checks the 0th progress coordinate</p>
 </div>
@@ -232,7 +362,7 @@ by combining weighted ensemble simulation with Markov model microstates using no
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
-<div class="admonition-todo admonition" id="id2">
+<div class="admonition-todo admonition" id="id4">
 <p class="admonition-title">Todo</p>
 <p>This only checks the 0th progress coordinate</p>
 </div>
@@ -258,10 +388,10 @@ by combining weighted ensemble simulation with Markov model microstates using no
 <dd class="field-odd"><p><strong>n_iter</strong> (<em>int</em>) – Iteration to get data for.</p>
 </dd>
 </dl>
-<div class="admonition-todo admonition" id="id3">
+<div class="admonition-todo admonition" id="id5">
 <p class="admonition-title">Todo</p>
 <p>May want to rework the logic here, depending on how this is used.
-Seems like some of this iteration can be removed.</p>
+Seems like some of this iteration can be removed/optimized.</p>
 </div>
 </dd></dl>
 
