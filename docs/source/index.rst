@@ -6,7 +6,7 @@
 Welcome to msm_we's documentation!
 ==================================
 
-
+This is a package for doing haMSM analysis on weighted ensemble trajectories.
 
 msm_we
 =======================

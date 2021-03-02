@@ -32,13 +32,16 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
-    "sphinx_rtd_theme"
+    "sphinx_rtd_theme",
+    'sphinx.ext.todo',
 ]
 
 autodoc_default_options = {
     'member-order': 'bysource',
     'undoc-members': True,
 }
+
+todo_include_todos = True
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
