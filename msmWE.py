@@ -39,6 +39,32 @@ class modelWE:
     """
 
     def initialize(self, fileSpecifier, refPDBfile, initPDBfile, modelName):
+        """
+        Initialize the model-builder.
+
+        Parameters
+        ----------
+        fileSpecifier : string
+            Glob that will produce a list of the output WESTPA files to analyze.
+
+            This is passed to ::
+
+                $ ls fileSpecifier
+
+            and *all* the files returned by this are used in the analysis.
+
+        refPDBfile : string
+            Path to PDB file that defines topology
+
+        initPDBfile : string
+            Path to PDB file that defines the basis state
+            **TODO** can this be states plural? Does it need to be extended to that?
+
+        modelName : string
+            Name to use in output filenames.
+        """
+
+
         self.modelName = modelName
         pCommand = "ls " + fileSpecifier
         p = subprocess.Popen(pCommand, stdout=subprocess.PIPE, shell=True)
@@ -49,6 +75,8 @@ class modelWE:
         self.fileList = fileList
         nF = len(fileList)
         self.nF = nF
+
+        #TODO: I think all this code is hard-coded to a 1-dimensional pcoord
         self.pcoord_ndim = 1
         self.pcoord_len = 2
         tau = 10.0e-12
@@ -77,16 +105,74 @@ class modelWE:
             self.coordsExist = False
 
     def is_WE_basis(self, pcoords):
+        """
+        Checks if the input progress coordinates are in the basis state.
+
+        Parameters
+        ----------
+        pcoords : numpy.ndarray(num_segments, num_pcoords)
+            Array of progress coordinates for each segment.
+
+        Returns
+        -------
+        True or False : bool
+
+        Todo
+        ----
+        This only checks the 0th progress coordinate
+        """
+
         isBasis = np.logical_and(
             pcoords[:, 0] > self.WEbasisp1_min, pcoords[:, 0] < self.WEbasisp1_max
         )
         return isBasis
 
     def is_WE_target(self, pcoords):
+        """
+        Checks if the input progress coordinates are in the target state.
+
+        Parameters
+        ----------
+        pcoords : numpy.ndarray(num_segments, num_pcoords)
+            Array of progress coordinates for each segment.
+
+        Returns
+        -------
+        True or False : bool
+
+        Todo
+        ----
+        This only checks the 0th progress coordinate
+
+        """
         isTarget = pcoords[:, 0] < self.WEtargetp1
         return isTarget
 
+
     def get_iter_data(self, n_iter):
+        """
+        Find the data corresponding to an iteration and update the object's fields with it.
+
+        Object fields updated with the information from the selected iteration:
+            - self.westList
+            - self.segindList
+            - self.weightList
+            - self.nSeg
+            - self.pcoord0List
+            - self.pcoord1List
+
+        Parameters
+        ----------
+        n_iter : int
+            Iteration to get data for.
+
+        Todo
+        ----
+        May want to rework the logic here, depending on how this is used.
+        Seems like some of this iteration can be removed.
+
+
+        """
         self.n_iter = n_iter
         westList = np.array([])
         segindList = np.array([])
@@ -94,9 +180,13 @@ class modelWE:
         pcoord0List = np.empty((0, self.pcoord_ndim))
         pcoord1List = np.empty((0, self.pcoord_ndim))
         nSeg = 0
+
+        # Iterate through each file index, trying to find a file that corresponds to the iteration of interest
+        # TODO: Can probably replace this with `for if, fileName in enumerate(self.fileList)`
         for iF in range(self.nF):
             fileName = self.fileList[iF]
             try:
+                # Try to find the h5 data file associated with this iteration
                 dataIn = h5py.File(fileName, "r")
                 dsetName = "/iterations/iter_%08d/seg_index" % int(n_iter)
                 e = dsetName in dataIn
@@ -108,6 +198,8 @@ class modelWE:
                     dsetNameP = "/iterations/iter_%08d/pcoord" % int(n_iter)
                     dsetP = dataIn[dsetNameP]
                     pcoord = dsetP[:]
+
+                    # Iterate over segments in this dataset
                     for iS in range(nS):
                         # if np.sum(pcoord[iS,self.pcoord_len-1,:])==0.0: #intentionally using this to write in dummy pcoords, this is a good thing to have for post-analysis though!
                         #    raise ValueError('Sum pcoord is 0, probably middle of WE iteration, not using iteration') f
