@@ -33,9 +33,59 @@ class modelWE:
     from WE sampling with basis (source) and target (sink) states with recycling.
 
     Set up for typical west.h5 file structure, with coordinates to be stored in west.h5 /iterations/auxdata/coord and
-    basis and target definitions from progress coordinates. Check out run_msmWE.slurm and run_msmWE_flux.py in scripts
-    folder for an implementation example. See Copperman and Zuckerman, Accelerated estimation of long-timescale kinetics
-    by combining weighted ensemble simulation with Markov model microstates using non-Markovian theory, arXiv (2020).
+    basis and target definitions from progress coordinates.
+
+    Check out run_msmWE.slurm and run_msmWE_flux.py in scripts folder for an implementation example.
+
+    Attributes
+    ----------
+        modelName: str
+            Name used for storing files
+        fileList: list of str
+            List of all filenames containing data
+        nF: int
+            Number of files in fileList
+
+            **TODO:** Deprecate this, replace with a property that's just len(self.fileList)
+        pcoord_ndim: int
+            Number of dimensions in the progress coordinate
+        pcoord_len: int
+            Number of stored progress coordinates in each iteration, per-segment.
+        tau: float
+            Resampling time for weighted ensemble.
+
+            **TODO**: Units?
+        WEtargetp1: float
+            Progress coordinate value at target.
+
+            **TODO**: The 1 refers to the 1st progress coordinate, since this code assumes 1-D
+        WEbasisp1_min: float
+            Minimum progress coordinate value within the basis state.
+        WEbasisp1_max: float
+            Maximum progress coordinate value within the basis state.
+        dimReduceMethod: str
+            Dimensionality reduction method. Must be one of "pca", "vamp", or "none".
+
+            **TODO**: This is the STRING "none", *NOT* a NoneType object.
+
+
+
+    Danger
+    -------
+    This code currently, in general, assumes a 1-D progress coordinate.
+
+    Todo
+    ----
+    In general, this class's methods generally handle data by holding state in the object. I think in general this
+    would benefit from a refactor to be more stateless, rather than shifting things in and out of the object's fields.
+
+
+    References
+    --------
+    Copperman and Zuckerman,
+    *Accelerated estimation of long-timescale kinetics by combining weighted ensemble simulation with Markov model
+    microstates using non-Markovian theory*, **arXiv** (2020).
+
     """
 
     def initialize(self, fileSpecifier, refPDBfile, initPDBfile, modelName):
@@ -62,6 +112,12 @@ class modelWE:
 
         modelName : string
             Name to use in output filenames.
+
+
+        Todo
+        ----
+        Some of this logic should be broken into a constructor, and default arguments handled in the constructor's
+        function signature.
         """
 
 
@@ -76,7 +132,6 @@ class modelWE:
         nF = len(fileList)
         self.nF = nF
 
-        #TODO: I think all this code is hard-coded to a 1-dimensional pcoord
         self.pcoord_ndim = 1
         self.pcoord_len = 2
         tau = 10.0e-12
@@ -148,7 +203,6 @@ class modelWE:
         isTarget = pcoords[:, 0] < self.WEtargetp1
         return isTarget
 
-
     def get_iter_data(self, n_iter):
         """
         Find the data corresponding to an iteration and update the object's fields with it.
@@ -169,9 +223,7 @@ class modelWE:
         Todo
         ----
         May want to rework the logic here, depending on how this is used.
-        Seems like some of this iteration can be removed.
-
-
+        Seems like some of this iteration can be removed/optimized.
         """
         self.n_iter = n_iter
         westList = np.array([])
@@ -181,14 +233,16 @@ class modelWE:
         pcoord1List = np.empty((0, self.pcoord_ndim))
         nSeg = 0
 
-        # Iterate through each file index, trying to find a file that corresponds to the iteration of interest
-        # TODO: Can probably replace this with `for if, fileName in enumerate(self.fileList)`
+        # Iterate through each file index, trying to find a file that contains the iteration of interest
+        # TODO: Can replace this with `for if, fileName in enumerate(self.fileList)`
         for iF in range(self.nF):
             fileName = self.fileList[iF]
             try:
                 # Try to find the h5 data file associated with this iteration
                 dataIn = h5py.File(fileName, "r")
                 dsetName = "/iterations/iter_%08d/seg_index" % int(n_iter)
+
+                # Check if the dataset
                 e = dsetName in dataIn
                 if e:
                     dset = dataIn[dsetName]
@@ -226,6 +280,9 @@ class modelWE:
         self.pcoord1List = pcoord1List
 
     def get_iterations(self):
+        """
+
+        """
         numFiles = np.array([])
         numSegments = np.array([])
         iterationList = np.array([])
@@ -233,12 +290,16 @@ class modelWE:
         n_iter = 1
         while nSeg > 0:
             nSeg = 0
+
+            # Iterate through each filename in fileList, and see if it contains the iteration we're looking for
             for iF in range(self.nF):
                 fileName = self.fileList[iF]
                 try:
                     dataIn = h5py.File(fileName, "r")
                     dsetName = "/iterations/iter_%08d/seg_index" % int(n_iter)
                     e = dsetName in dataIn
+
+                    # If this file does contain the iteration of interest
                     if e:
                         dset = dataIn[dsetName]
                         newSet = dset[:]
@@ -254,6 +315,7 @@ class modelWE:
                 sys.stdout.write(
                     "Iteration " + str(n_iter) + " has " + str(nSeg) + " segments...\n"
                 )
+
             n_iter = n_iter + 1
         self.numSegments = numSegments
         self.maxIter = numSegments.size
