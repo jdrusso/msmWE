@@ -1,6 +1,0 @@
-numpy
-h5py
-matplotlib
-mdtraj
-pyemma
-sphinx_rtd_theme
