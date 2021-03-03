@@ -13,7 +13,6 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
   
     # The type of runner that the job will run on
@@ -26,10 +25,6 @@ jobs:
     steps:
 
     - uses: actions/checkout@v1
-    
-    # By default, updates pip and installs from requirements.txt
-#     - name: Install Python dependencies
-#       uses: py-actions/py-dependency-install@v2
 
     - name: "Prep anaconda"
       run: echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
@@ -58,32 +53,16 @@ jobs:
 #         pre-build-command: "python -m pip install sphinx_rtd_theme && source ~/.bash_profile && conda activate test_env" # See if this fixes numpy not loading
 #         build-command: "sphinx-build -b html source build"
 #         docs-folder: "docs/"
+
     - name: "Install sphinx"
       run: "sudo apt-get update -y && sudo apt-get install python3-sphinx"
       
     - name: "Render with sphinx"
       shell: bash -l {0}
-      run: "cd docs && sphinx-build -b html source build && ls && cd .. && ls"
-    
-    - name: "Tree"
-      shell: bash -l {0}
-      run: "tree docs"
-        
-        
+      run: "cd docs && sphinx-build -b html source build && cd .. "
 
-#     -name: "Print directory contents"
-#     shell: bash -l {0}
-    
-#     - uses: actions/upload-artifact@v1
-#       with:
-#         name: DocumentationHTML
-#         path: build/html/
-        
-    # Create an artifact out of the previously built pdf.
-#     - uses: actions/upload-artifact@v1
-#       with:
-#         name: Documentation
-#         path: docs2/build/latex/pdfexample.pdf
+
+
     # Publish built docs to gh-pages branch.
     # ===============================
     - name: Commit documentation changes
